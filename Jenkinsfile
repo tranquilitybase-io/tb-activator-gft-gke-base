@@ -65,27 +65,24 @@ pipeline
         stage('Activator Terraform init validate plan') {
             steps {
                 container('gcloud'){
-//                     sh "cd /var/secrets/google/"
-//                     sh "ls"
-//                     sh "cat ./ec-service-account-config.json"
-//                          sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
-                    sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json" // && terraform init deployment"
-//                     sh "cd ../../.."
-//                     sh "ls -ltr"
+//                  sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
+                    sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json"
                     sh "terraform init deployment"
-//                     sh "terraform validate deployment/"
-//                     sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                    sh "terraform validate deployment/"
+                    sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
                 }
             }
         }
         stage('Activator Infra Deploy') {
             steps {
-                sh "terraform apply  --auto-approve activator-plan"
-                sh "terraform output -json > activator_outputs.json"
-                script {
-                    terraform_output = sh (returnStdout: true, script: 'cat activator_outputs.json').trim()
-                    echo "Terraform output : ${terraform_output}"
-                    archiveArtifacts artifacts: 'activator_outputs.json'
+                container('gcloud'){
+                    sh "terraform apply  --auto-approve activator-plan"
+                    sh "terraform output -json > activator_outputs.json"
+                    script {
+                        terraform_output = sh (returnStdout: true, script: 'cat activator_outputs.json').trim()
+                        echo "Terraform output : ${terraform_output}"
+                        archiveArtifacts artifacts: 'activator_outputs.json'
+                    }
                 }
             }
         }
