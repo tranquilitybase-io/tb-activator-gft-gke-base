@@ -17,14 +17,14 @@ pipeline
         stage('Activate GCP Service Account and Set Project') {
             steps {
                 container('gcloud'){
-                sh '''
-                    cd /var/secrets/google/
-                    ls
-                    cat ./ec-service-account-config.json
-                    cd ../../..
-                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                    gcloud config set project $projectid
-                '''
+                    sh '''
+                        cd /var/secrets/google/
+                        ls
+                        cat ./ec-service-account-config.json
+                        cd ../../..
+                        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                        gcloud config set project $projectid
+                    '''
                 }
             }
         }
@@ -65,10 +65,16 @@ pipeline
         stage('Activator Terraform init validate plan') {
             steps {
                 container('gcloud'){
-                    sh "ls -ltr"
-                    sh "terraform init deployment"
-                    sh "terraform validate deployment/"
-                    sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                    sh '''
+                        cd /var/secrets/google/
+                        ls
+                        cat ./ec-service-account-config.json
+                        cd ../../..
+                        ls -ltr
+                        terraform init deployment
+                        terraform validate deployment/
+                        terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/
+                    '''
                 }
             }
         }
