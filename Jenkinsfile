@@ -1,6 +1,11 @@
 pipeline
 {
-    agent any
+    agent {
+        kubernetes {
+          label 'kubepod'
+          defaultContainer 'gcloud'
+        }
+    }
     environment {
         def DockerHome = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
         def DockerCMD = "${DockerHome}/bin/docker"
@@ -12,7 +17,7 @@ pipeline
         stage('Activate GCP Service Account and Set Project') {
             steps {
                 container('gcloud'){
-                    sh "gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS"
+                    sh "gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS"
                     sh "gcloud config set project $projectid"
                 }
             }
