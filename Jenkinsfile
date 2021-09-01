@@ -65,6 +65,10 @@ pipeline
         stage('Activator Terraform init validate plan') {
             steps {
                 container('gcloud'){
+                    sh "cd /var/secrets/google/"
+                    sh "ls"
+                    sh "cat ./ec-service-account-config.json"
+                    sh "cd ../../.."
                     sh "ls -ltr"
                     sh "terraform init deployment"
                     sh "terraform validate deployment/"
