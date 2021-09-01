@@ -48,24 +48,28 @@ pipeline
         }
         stage('Setup Terraform') {
             steps {
-                sh "apt-get update && apt-get upgrade -y && apt-get install -y python3 wget unzip jq"
-                sh "wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip"
-                sh "unzip ./terraform_0.12.24_linux_amd64.zip"
-                sh "mv terraform /usr/bin/ && rm -f terraform_0.12.24_linux_amd64.zip"
-                sh "mkdir deployment_code"
-                sh "cp deployment/*.tf deployment_code/"
-                sh "echo \$activator_params | jq '.' > deployment_code/activator_params.json"
-                sh "cat deployment_code/activator_params.json"
-                sh "echo \$environment_params | jq '.' > deployment_code/environment_params.json"
-                sh "cat deployment_code/environment_params.json"
+                container('gcloud'){
+                    sh "apt-get update && apt-get upgrade -y && apt-get install -y python3 wget unzip jq"
+                    sh "wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip"
+                    sh "unzip ./terraform_0.12.24_linux_amd64.zip"
+                    sh "mv terraform /usr/bin/ && rm -f terraform_0.12.24_linux_amd64.zip"
+                    sh "mkdir deployment_code"
+                    sh "cp deployment/*.tf deployment_code/"
+                    sh "echo \$activator_params | jq '.' > deployment_code/activator_params.json"
+                    sh "cat deployment_code/activator_params.json"
+                    sh "echo \$environment_params | jq '.' > deployment_code/environment_params.json"
+                    sh "cat deployment_code/environment_params.json"
+                }
             }
         }
         stage('Activator Terraform init validate plan') {
             steps {
-                sh "ls -ltr"
-                sh "terraform init deployment"
-                sh "terraform validate deployment/"
-                sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                container('gcloud'){
+                    sh "ls -ltr"
+                    sh "terraform init deployment"
+                    sh "terraform validate deployment/"
+                    sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                }
             }
         }
         stage('Activator Infra Deploy') {
