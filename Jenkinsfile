@@ -68,7 +68,7 @@ pipeline
 //                     sh "cd /var/secrets/google/"
 //                     sh "ls"
 //                     sh "cat ./ec-service-account-config.json"
-                    sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS && terraform init deployment"
+                     sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
 //                     sh "cd ../../.."
 //                     sh "ls -ltr"
 //                     sh "terraform init deployment"
