@@ -61,18 +61,20 @@ pipeline
             }
         }
         stage('Activator Terraform init validate plan') {
-            container('gcloud'){
-                sh '''
-                cd /var/secrets/google/
-                ls
-                cat ./ec-service-account-config.json
-                cd ../../..
+            steps {
+                container('gcloud'){
+                    sh '''
+                    cd /var/secrets/google/
+                    ls
+                    cat ./ec-service-account-config.json
+                    cd ../../..
 
-                ls -ltr
-                terraform init deployment_code
-                terraform validate deployment_code/
-                terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/
-                '''
+                    ls -ltr
+                    terraform init deployment_code
+                    terraform validate deployment_code/
+                    terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/
+                    '''
+                }
             }
         }
         stage('Activator Infra Deploy') {
