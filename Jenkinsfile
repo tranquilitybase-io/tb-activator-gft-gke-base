@@ -22,8 +22,6 @@ pipeline
                     ls
                     cat ./ec-service-account-config.json
                     cd ../../..
-                    echo $GOOGLE_APPLICATION_CREDENTIALS
-//                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                     gcloud config set project $projectid
                 '''
@@ -71,11 +69,10 @@ pipeline
 //                     sh "ls"
 //                     sh "cat ./ec-service-account-config.json"
 //                          sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
-                       sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json"
-                       sh "terraform init deployment"
+                    sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json" // && terraform init deployment"
 //                     sh "cd ../../.."
 //                     sh "ls -ltr"
-//                     sh "terraform init deployment"
+                    sh "terraform init deployment"
 //                     sh "terraform validate deployment/"
 //                     sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
                 }
