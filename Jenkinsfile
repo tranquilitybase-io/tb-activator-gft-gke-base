@@ -17,12 +17,14 @@ pipeline
         stage('Activate GCP Service Account and Set Project') {
             steps {
                 container('gcloud'){
+                sh '''
                     cd /var/secrets/google/
                     ls
                     cat ./ec-service-account-config.json
                     cd ../../..
-                    sh "gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS"
-                    sh "gcloud config set project $projectid"
+                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                    gcloud config set project $projectid
+                '''
                 }
             }
         }
