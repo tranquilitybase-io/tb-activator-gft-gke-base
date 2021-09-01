@@ -22,8 +22,9 @@ pipeline
                     ls
                     cat ./ec-service-account-config.json
                     cd ../../..
+                    echo $GOOGLE_APPLICATION_CREDENTIALS
 //                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                    gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json
+                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                     gcloud config set project $projectid
                 '''
                 }
