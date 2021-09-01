@@ -68,6 +68,7 @@ pipeline
                     sh "cd /var/secrets/google/"
                     sh "ls"
                     sh "cat ./ec-service-account-config.json"
+                    sh "cat /var/secrets/google/ec-service-account-config.json"
                     sh "cd ../../.."
                     sh "ls -ltr"
                     sh "terraform init deployment"
