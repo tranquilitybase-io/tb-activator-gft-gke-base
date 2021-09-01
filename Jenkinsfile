@@ -18,11 +18,12 @@ pipeline
             steps {
                 container('gcloud'){
                 sh '''
-                    cd /var/secrets/google/
-                    ls
-                    cat ./ec-service-account-config.json
-                    cd ../../..
-                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+//                     cd /var/secrets/google/
+//                     ls
+//                     cat ./ec-service-account-config.json
+//                     cd ../../..
+//                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                    gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json
                     gcloud config set project $projectid
                 '''
                 }
@@ -69,7 +70,8 @@ pipeline
 //                     sh "ls"
 //                     sh "cat ./ec-service-account-config.json"
 //                          sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
-                       sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
+                       sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json"
+                       sh "terraform init deployment"
 //                     sh "cd ../../.."
 //                     sh "ls -ltr"
 //                     sh "terraform init deployment"
