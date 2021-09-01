@@ -69,7 +69,7 @@ pipeline
                     sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json"
                     sh "terraform init deployment"
                     sh "terraform validate deployment/"
-//                     sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                    sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
                 }
             }
         }
