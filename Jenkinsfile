@@ -65,8 +65,8 @@ pipeline
         stage('Activator Terraform init validate plan') {
             steps {
                 container('gcloud'){
-                    sh echo "$projectid"
-                    sh cat "deployment_code/activator_params.json "
+                    sh "echo $projectid"
+                    sh "cat deployment_code/activator_params.json"
                     sh '''
                         echo "$projectid"
                         terraform init deployment_code
