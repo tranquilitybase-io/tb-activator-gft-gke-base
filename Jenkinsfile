@@ -65,9 +65,10 @@ pipeline
         stage('Activator Terraform init validate plan') {
             steps {
                 container('gcloud'){
-//                  sh "cat /var/secrets/google/ec-service-account-config.json && gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json && terraform init deployment"
-//                     sh "gcloud auth activate-service-account --key-file=/var/secrets/google/ec-service-account-config.json"
+                    sh echo "$projectid"
+                    sh cat "deployment_code/activator_params.json "
                     sh '''
+                        echo "$projectid"
                         terraform init deployment_code
                         terraform validate deployment_code/
                         terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/
