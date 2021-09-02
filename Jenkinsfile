@@ -71,11 +71,10 @@ pipeline
                         echo "$projectid"
                         terraform init deployment_code
                         terraform validate deployment_code/
-                        terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/
-
-                        terraform apply  --auto-approve activator-plan
-                        terraform output -json > activator_outputs.json
-                       '''
+                        '''
+                    sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                    sh "terraform apply --auto-approve activator-plan"
+                    sh "terraform output -json > activator_outputs.json"
                 }
             }
         }
