@@ -72,6 +72,9 @@ pipeline
                         terraform init deployment_code
                         terraform validate deployment_code/
                         terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/
+
+                        terraform apply  --auto-approve activator-plan
+                        terraform output -json > activator_outputs.json
                        '''
                 }
             }
@@ -79,13 +82,13 @@ pipeline
         stage('Activator Infra Deploy') {
             steps {
                 container('gcloud'){
-                    sh "terraform apply  --auto-approve activator-plan"
-                    sh "terraform output -json > activator_outputs.json"
-                    script {
-                        terraform_output = sh (returnStdout: true, script: 'cat activator_outputs.json').trim()
-                        echo "Terraform output : ${terraform_output}"
-                        archiveArtifacts artifacts: 'activator_outputs.json'
-                    }
+//                     sh "terraform apply  --auto-approve activator-plan"
+//                     sh "terraform output -json > activator_outputs.json"
+//                     script {
+//                         terraform_output = sh (returnStdout: true, script: 'cat activator_outputs.json').trim()
+//                         echo "Terraform output : ${terraform_output}"
+//                         archiveArtifacts artifacts: 'activator_outputs.json'
+//                     }
                 }
             }
         }
