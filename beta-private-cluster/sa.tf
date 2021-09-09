@@ -37,11 +37,9 @@ resource "random_string" "cluster_service_account_suffix" {
 }
 
 resource "google_service_account" "cluster_service_account" {
-//  count        = var.create_service_account ? 1 : 0
-  count        = 0
+  count        = var.create_service_account ? 1 : 0
   project      = var.project_id
-//  account_id   = "tf-gke-${substr(var.name, 0, min(15, length(var.name)))}-${random_string.cluster_service_account_suffix.result}"
-  account_id   = "tf-gke-activator-clust-zrvk"
+  account_id   = "tf-gke-${substr(var.name, 0, min(15, length(var.name)))}-${random_string.cluster_service_account_suffix.result}"
   display_name = "Terraform-managed service account for cluster ${var.name}"
 }
 
