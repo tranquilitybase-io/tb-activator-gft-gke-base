@@ -39,7 +39,7 @@ variable "zone" {
 
 variable "standard_subnetwork" {
   description = "VPC subnetwork such as main-network-subnet"
-  default     = "tb-mgmt-snet-europe-west1"
+  default     = "sb-n-shared-base-europe-west1"
 }
 
 
