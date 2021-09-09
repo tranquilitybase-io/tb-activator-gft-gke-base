@@ -32,8 +32,8 @@ resource "google_compute_instance" "vm_instance" {
 
   tags = ["dsactivatortag1", "dsactivatortag2"] 
   network_interface {
-   subnetwork = var.standard_subnetwork
-   subnetwork_project = var.host_project_id
+   subnetwork = "sb-n-shared-base-europe-west1"
+   subnetwork_project = "prj-n-shared-base-d062"
   }
 }
 
