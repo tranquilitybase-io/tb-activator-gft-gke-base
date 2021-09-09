@@ -34,8 +34,6 @@ resource "google_compute_instance" "vm_instance" {
   network_interface {
    subnetwork = var.standard_subnetwork
    subnetwork_project = var.host_project_id
-    access_config {
-    }
   }
 }
 
