@@ -28,13 +28,13 @@ variable "landing_bucket_name" {
 }
 
 variable "region" {
-  description = "General location of the project, example 'europe-west2'"
-  default     = "europe-west2"
+  description = "General location of the project, example 'europe-west1'"
+  default     = "europe-west1"
 }
 
 variable "zone" {
-  description = "General zone of the project, example 'europe-west2-b'"
-  default     = "europe-west2-b"
+  description = "General zone of the project, example 'europe-west1-b'"
+  default     = "europe-west1-b"
 }
 
 variable "standard_subnetwork" {
