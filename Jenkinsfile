@@ -18,10 +18,6 @@ pipeline
             steps {
                 container('gcloud'){
                 sh '''
-                    cd /var/secrets/google/
-                    ls
-                    cat ./ec-service-account-config.json
-                    cd ../../..
                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                     gcloud config set project $projectid
                 '''
