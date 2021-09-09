@@ -1,16 +1,16 @@
 # Google Storage
-resource "google_storage_bucket" "landing_data" {
-  name          = "${var.host_project_id}-${var.landing_bucket_name}"
-  location      = var.region
-  project       = var.host_project_id
-  force_destroy = "true"
-
-  labels = {
-    logical_functional_zone = "landing"
-    logical_group           = "landing-group"
-    logical_group_types     = "store"
-  }
-}
+//resource "google_storage_bucket" "landing_data" {
+//  name          = "${var.host_project_id}-${var.landing_bucket_name}"
+//  location      = var.region
+//  project       = var.host_project_id
+//  force_destroy = "true"
+//
+//  labels = {
+//    logical_functional_zone = "landing"
+//    logical_group           = "landing-group"
+//    logical_group_types     = "store"
+//  }
+//}
 
 # Google Compute Engines
 resource "google_compute_instance" "vm_instance" {

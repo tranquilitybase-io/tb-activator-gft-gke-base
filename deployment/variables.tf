@@ -42,3 +42,5 @@ variable "standard_subnetwork" {
   default     = "tb-mgmt-snet-europe-west1"
 }
 
+
+
