@@ -46,9 +46,9 @@ pipeline
             steps {
                 container('gcloud'){
                     sh "apt-get update && apt-get upgrade -y && apt-get install -y python3 wget unzip jq"
-                    sh "wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip"
-                    sh "unzip ./terraform_0.12.24_linux_amd64.zip"
-                    sh "mv terraform /usr/bin/ && rm -f terraform_0.12.24_linux_amd64.zip"
+                    sh "wget https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip"
+                    sh "unzip ./terraform_0.13.5_linux_amd64.zip"
+                    sh "mv terraform /usr/bin/ && rm -f terraform_0.13.5_linux_amd64.zip"
                     sh "mkdir deployment_code"
                     sh "cp deployment/*.tf deployment_code/"
                     sh "echo \$activator_params | jq '.' > deployment_code/activator_params.json"
