@@ -68,7 +68,7 @@ pipeline
                         terraform init deployment_code
                         terraform validate deployment_code/
                         '''
-                    sh "terraform plan -out activator-plan -var='host_project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                    sh "terraform plan -out activator-plan -var='project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
                     sh "terraform apply --auto-approve activator-plan"
                     sh "terraform output -json > activator_outputs.json"
                 }
