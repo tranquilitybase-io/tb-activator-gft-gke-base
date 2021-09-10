@@ -402,7 +402,7 @@ variable "skip_provisioners" {
 
 variable "default_max_pods_per_node" {
   description = "The maximum number of pods to schedule per node"
-  default     = 110
+  default     = 10
 }
 
 variable "deploy_using_private_endpoint" {
