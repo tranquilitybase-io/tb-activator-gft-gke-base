@@ -24,9 +24,9 @@ output "client_token" {
   value     = base64encode(data.google_client_config.default.access_token)
 }
 
-output "ca_certificate" {
-  value = module.gke.ca_certificate
-}
+//output "ca_certificate" {
+//  value = module.gke.ca_certificate
+//}
 
 output "service_account" {
   description = "The default service account used for running nodes."
