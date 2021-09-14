@@ -25,9 +25,13 @@ terraform {
 # PREPARE PROVIDERS
 # ---------------------------------------------------------------------------------------------------------------------
 
+provider "google" {
+  project = var.project
+  region  = var.region
+}
 
 provider "google-beta" {
-  project = var.project_id
+  project = var.project
   region  = var.region
 }
 
@@ -39,11 +43,11 @@ module "gke_cluster" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
-  source = "../terraform-google-gke-0.10.0/modules/gke-cluster"
+  source = "../../modules/gke-cluster"
 
-  name = "clustername"
+  name = var.cluster_name
 
-  project  = var.project_id
+  project  = var.project
   location = var.location
   network  = module.vpc_network.network
 
@@ -91,7 +95,7 @@ resource "google_container_node_pool" "node_pool" {
   provider = google-beta
 
   name     = "private-pool"
-  project  = var.project_id
+  project  = var.project
   location = var.location
   cluster  = module.gke_cluster.name
 
@@ -152,10 +156,10 @@ module "gke_service_account" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-service-account?ref=v0.2.0"
-  source = "../terraform-google-gke-0.10.0/modules/gke-service-account"
+  source = "../../modules/gke-service-account"
 
   name        = var.cluster_service_account_name
-  project     = var.project_id
+  project     = var.project
   description = var.cluster_service_account_description
 }
 
@@ -167,7 +171,7 @@ module "vpc_network" {
   source = "github.com/gruntwork-io/terraform-google-network.git//modules/vpc-network?ref=v0.8.2"
 
   name_prefix = "${var.cluster_name}-network-${random_string.suffix.result}"
-  project     = var.project_id
+  project     = var.project
   region      = var.region
 
   cidr_block           = var.vpc_cidr_block

@@ -3,7 +3,7 @@
 # These variables are expected to be passed in by the operator.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "project_id" {
+variable "project" {
   description = "The project ID where all resources will be launched."
   type        = string
 }
