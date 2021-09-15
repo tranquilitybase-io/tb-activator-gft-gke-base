@@ -32,10 +32,6 @@ resource "google_container_cluster" "cluster" {
   network    = var.network
   subnetwork = var.subnetwork
 
-  istio_config {
-    disabled = !var.istio
-    auth     = var.istio_auth
-  }
 
   logging_service    = var.logging_service
   monitoring_service = var.monitoring_service
@@ -96,7 +92,13 @@ resource "google_container_cluster" "cluster" {
     network_policy_config {
       disabled = !var.enable_network_policy
     }
+
+    istio_config {
+      disabled = !var.istio
+      auth = var.istio_auth
+    }
   }
+
 
   network_policy {
     enabled = var.enable_network_policy
