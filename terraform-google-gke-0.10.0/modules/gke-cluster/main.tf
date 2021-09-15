@@ -32,7 +32,10 @@ resource "google_container_cluster" "cluster" {
   network    = var.network
   subnetwork = var.subnetwork
 
-  istio      = var.istio
+  istio_config {
+    disabled = !var.istio
+    auth     = var.istio_auth
+  }
 
   logging_service    = var.logging_service
   monitoring_service = var.monitoring_service

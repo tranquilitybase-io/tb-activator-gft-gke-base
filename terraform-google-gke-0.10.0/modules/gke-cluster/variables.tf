@@ -42,6 +42,11 @@ variable "istio" {
   default     = true
 }
 
+variable "istio_auth" {
+  type        = string
+  description = "(Beta) The authentication type between services in Istio."
+  default     = "AUTH_MUTUAL_TLS"
+}
 
 variable "description" {
   description = "The description of the cluster"
