@@ -37,6 +37,11 @@ variable "cluster_secondary_range_name" {
 # OPTIONAL PARAMETERS
 # Generally, these values won't need to be changed.
 # ---------------------------------------------------------------------------------------------------------------------
+variable "istio" {
+  description = "Boolean to enable / disable Istio"
+  default     = true
+}
+
 
 variable "description" {
   description = "The description of the cluster"
