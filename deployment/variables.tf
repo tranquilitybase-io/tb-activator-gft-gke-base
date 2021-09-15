@@ -23,6 +23,11 @@ variable "region" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
+variable "istio" {
+  description = "Boolean to enable / disable Istio"
+  default     = true
+}
+
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster."
   type        = string
