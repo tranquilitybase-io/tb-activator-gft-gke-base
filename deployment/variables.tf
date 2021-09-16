@@ -23,7 +23,7 @@ variable "region" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "istio" {
+variable "enable_istio" {
   description = "Boolean to enable / disable Istio"
   default     = true
 }

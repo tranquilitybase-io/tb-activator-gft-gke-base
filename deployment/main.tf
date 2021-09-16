@@ -39,7 +39,7 @@ module "gke_cluster" {
   project  = var.project_id
   location = var.location
   network  = module.vpc_network.network
-  istio    = var.istio
+  enable_istio    = var.enable_istio
 
   # We're deploying the cluster in the 'public' subnetwork to allow outbound internet access
   # See the network access tier table for full details:
