@@ -32,7 +32,7 @@ module "gke_cluster" {
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
 //  source = "../terraform-google-gke-0.10.0/modules/gke-cluster"
-  source = "github.com/n0npax/terraform-google-gke/tree/add-istio-switch//modules/gke-cluster?ref=add-istio-switch"
+  source = "github.com/n0npax/terraform-google-gke.git//modules/gke-cluster?ref=add-istio-switch"
 
   name = "clustername"
 
