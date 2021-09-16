@@ -31,22 +31,21 @@ module "gke_cluster" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
-//  source = "../terraform-google-gke-0.10.0/modules/gke-cluster"
-  source = "github.com/n0npax/terraform-google-gke.git//modules/gke-cluster?ref=add-istio-switch"
+  source = "github.com/geoff-gft/terraform-google-gke.git//modules/gke-cluster?ref=enable-istio"
 
   name = "clustername"
 
   project  = var.project_id
   location = var.location
   network  = module.vpc_network.network
-  enable_istio    = var.enable_istio
+  istio    = var.enable_istio
 
   # We're deploying the cluster in the 'public' subnetwork to allow outbound internet access
   # See the network access tier table for full details:
   # https://github.com/gruntwork-io/terraform-google-network/tree/master/modules/vpc-network#access-tier
   subnetwork                    = module.vpc_network.public_subnetwork
   cluster_secondary_range_name  = module.vpc_network.public_subnetwork_secondary_range_name
-//  services_secondary_range_name = module.vpc_network.public_services_secondary_range_name
+  services_secondary_range_name = module.vpc_network.public_services_secondary_range_name
 
   # When creating a private cluster, the 'master_ipv4_cidr_block' has to be defined and the size must be /28
   master_ipv4_cidr_block = var.master_ipv4_cidr_block
@@ -70,11 +69,11 @@ module "gke_cluster" {
     },
   ]
 
-//  enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
+  enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
 
-//  resource_labels = {
-//    environment = "testing"
-//  }
+  resource_labels = {
+    environment = "testing"
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -145,7 +144,7 @@ resource "google_container_node_pool" "node_pool" {
 module "gke_service_account" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
-  source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-service-account?ref=v0.2.0"
+  source = "github.com/geoff-gft/terraform-google-gke//modules/gke-service-account?ref=enable-istio"
 
   name        = var.cluster_service_account_name
   project     = var.project_id
