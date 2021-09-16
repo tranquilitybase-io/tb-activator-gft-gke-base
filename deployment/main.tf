@@ -46,7 +46,7 @@ module "gke_cluster" {
   # https://github.com/gruntwork-io/terraform-google-network/tree/master/modules/vpc-network#access-tier
   subnetwork                    = module.vpc_network.public_subnetwork
   cluster_secondary_range_name  = module.vpc_network.public_subnetwork_secondary_range_name
-  services_secondary_range_name = module.vpc_network.public_services_secondary_range_name
+//  services_secondary_range_name = module.vpc_network.public_services_secondary_range_name
 
   # When creating a private cluster, the 'master_ipv4_cidr_block' has to be defined and the size must be /28
   master_ipv4_cidr_block = var.master_ipv4_cidr_block
@@ -70,11 +70,11 @@ module "gke_cluster" {
     },
   ]
 
-  enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
+//  enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
 
-  resource_labels = {
-    environment = "testing"
-  }
+//  resource_labels = {
+//    environment = "testing"
+//  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
