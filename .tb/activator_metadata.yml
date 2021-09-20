@@ -1,1 +1,1 @@
-gcpApisRequired: container.googleapis.com
+gcpApisRequired: "container.googleapis.com"
