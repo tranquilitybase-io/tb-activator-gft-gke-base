@@ -23,6 +23,12 @@ variable "region" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
+variable "alternative_default_service_account" {
+  description = "Alternative Service Account to be used by the Node VMs. If not specified, the default compute Service Account will be used. Provide if the default Service Account is no longer available."
+  type        = string
+  default     = null
+}
+
 variable "enable_istio" {
   description = "Boolean to enable / disable Istio"
   default     = true
