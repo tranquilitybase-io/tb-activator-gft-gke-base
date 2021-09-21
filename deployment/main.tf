@@ -33,7 +33,7 @@ module "gke_cluster" {
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
   source = "github.com/geoff-gft/terraform-google-gke.git//modules/gke-cluster?ref=enable-istio"
 
-  name = "clustername"
+  name = var.cluster_name
 
   project  = var.project_id
   location = var.location
