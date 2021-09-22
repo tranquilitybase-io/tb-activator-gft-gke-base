@@ -34,6 +34,19 @@ variable "enable_istio" {
   default     = true
 }
 
+
+variable "alt_vm_service_account_name" {
+  description = "Name of the alternate default service account used for the GKE default cluster node pool."
+  type        = string
+  default     = "alt-default-private-cluster-sa"
+}
+
+variable "alt_vm_service_account_description" {
+  description = "A description of the alternate default service account used for the GKE default cluster node pool."
+  type        = string
+  default     = "Example alternate default Service Account managed by Terraform"
+}
+
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster."
   type        = string

@@ -152,6 +152,19 @@ module "gke_service_account" {
   description = var.cluster_service_account_description
 }
 
+
+# ----------------------------------------------------------------------------------------------------------------------
+# CREATE ALTERNATE VM ACCOUNT
+# ----------------------------------------------------------------------------------------------------------------------
+module "gke_service_account" {
+  source = "github.com/geoff-gft/terraform-google-gke//modules/alt-compute-default-service-account?ref=enable-istio"
+
+  name        = var.alt_vm_service_account_name
+  project     = var.project_id
+  description = var.alt_vm_service_account_description
+}
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A NETWORK TO DEPLOY THE CLUSTER TO
 # ---------------------------------------------------------------------------------------------------------------------
@@ -180,3 +193,5 @@ resource "random_string" "suffix" {
   special = false
   upper   = false
 }
+
+
