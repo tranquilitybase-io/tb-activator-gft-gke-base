@@ -39,7 +39,7 @@ module "gke_cluster" {
   location = var.location
   network  = module.vpc_network.network
   enable_istio    = var.enable_istio
-  alternative_default_service_account = var.alternative_default_service_account
+  alternative_default_service_account = module.alt_default_service_account.email
 
   # We're deploying the cluster in the 'public' subnetwork to allow outbound internet access
   # See the network access tier table for full details:
@@ -156,7 +156,7 @@ module "gke_service_account" {
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE ALTERNATE VM ACCOUNT
 # ----------------------------------------------------------------------------------------------------------------------
-module "gke_service_account" {
+module "alt_default_service_account" {
   source = "github.com/geoff-gft/terraform-google-gke//modules/alt-compute-default-service-account?ref=enable-istio"
 
   name        = var.alt_vm_service_account_name
