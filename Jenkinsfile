@@ -73,18 +73,5 @@ pipeline
                 }
             }
         }
-        stage('Activator Infra Deploy') {
-            steps {
-                container('gcloud'){
-//                     sh "terraform apply  --auto-approve activator-plan"
-//                     sh "terraform output -json > activator_outputs.json"
-//                     script {
-//                         terraform_output = sh (returnStdout: true, script: 'cat activator_outputs.json').trim()
-//                         echo "Terraform output : ${terraform_output}"
-//                         archiveArtifacts artifacts: 'activator_outputs.json'
-//                     }
-                }
-            }
-        }
     }
 }
