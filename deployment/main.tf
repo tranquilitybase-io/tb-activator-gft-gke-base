@@ -210,6 +210,5 @@ module "config_sync" {
   create_ssh_key   = "true"
   secret_type      = "ssh"
   sync_repo        = "git@github.com:geoff-gft/hello-config-sync.git"
-  sync_branch      = "1.0.0"
   policy_dir       = "foo-corp"
 }
