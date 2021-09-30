@@ -7,8 +7,8 @@ pipeline
         }
     }
     environment {
-        def DockerHome = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-        def DockerCMD = "${DockerHome}/bin/docker"
+//         def DockerHome = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+//         def DockerCMD = "${DockerHome}/bin/docker"
         def activator_params = ""
         def environment_params = ""
         def terraform_output = ""
