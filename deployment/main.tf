@@ -207,7 +207,7 @@ module "config_sync" {
   cluster_name     = module.gke_cluster.name
   location         = var.location
   cluster_endpoint = module.gke_cluster.endpoint
-  create_ssh_key   = "true"
+//  create_ssh_key   = "true"
   secret_type      = "none"
   sync_repo        = "https://github.com/larkintuckerllc/hello-config-sync"
   policy_dir       = "foo-corp"
