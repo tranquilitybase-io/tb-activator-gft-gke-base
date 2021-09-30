@@ -81,6 +81,7 @@ module "gke_cluster" {
   }
 }
 
+
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A NODE POOL
 # ---------------------------------------------------------------------------------------------------------------------
@@ -198,13 +199,16 @@ resource "random_string" "suffix" {
   upper   = false
 }
 
-resource "google_sourcerepo_repository" "demo-application" {
-  name = "demo-application"
-}
+// ------
+module "config_sync" {
+  source           = "terraform-google-modules/kubernetes-engine/google//modules/config-sync"
 
-//resource "google_cloudbuild_trigger" "build-trigger" {
-//  trigger_template {
-//    branch_name = "development"
-//    repo_name   = "demo-application"
-//  }
-//}
+  project_id       = var.project_id
+  cluster_name     = module.gke_cluster.name
+  location         = var.location
+  cluster_endpoint = module.gke_cluster.endpoint
+
+  sync_repo        = "git@github.com:GoogleCloudPlatform/csp-config-management.git"
+  sync_branch      = "1.0.0"
+  policy_dir       = "foo-corp"
+}
