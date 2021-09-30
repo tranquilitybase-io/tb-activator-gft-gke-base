@@ -19,6 +19,8 @@ pipeline
                         sh '''
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                             gcloud config set project ${PROJECT_ID}
+
+                            gsutil ls -b gs://${PROJECT_ID}_state || gsutil mb -l europe-west1 gs://${PROJECT_ID}_state
                         '''
                     }
                 }
@@ -64,7 +66,6 @@ pipeline
                             '''
                         sh "terraform plan -out activator-plan -var='project_id=$PROJECT_ID' -var-file=deployment_code/environment_params.json deployment_code/"
                         sh "terraform apply --auto-approve activator-plan"
-                        sh "terraform output -json > activator_outputs.json"
                     }
                 }
             }

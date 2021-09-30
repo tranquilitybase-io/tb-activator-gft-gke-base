@@ -1,2 +1,3 @@
 gcpApisRequired:
   - container.googleapis.com
+  - sourcerepo.googleapis.com
