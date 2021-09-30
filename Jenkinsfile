@@ -16,7 +16,7 @@ pipeline
     stages {
         stage('Activate GCP Service Account and Set Project') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'Development-Project-ID', variable: 'SECRET')]) {
+                withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'SECRET')]) {
                     container('gcloud'){
                         sh '''
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
