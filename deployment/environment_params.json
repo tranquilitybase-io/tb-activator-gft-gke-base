@@ -1,0 +1,7 @@
+{
+  "project_id": "prj-bu1-d-sample-floating-64f7",
+  "cluster_name": "development",
+  "enable_istio": "true",
+  "region": "europe-west1",
+  "location": "europe-west1"
+}

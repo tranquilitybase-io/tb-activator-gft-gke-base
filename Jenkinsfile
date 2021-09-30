@@ -9,8 +9,8 @@ pipeline
     environment {
         def DockerHome = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
         def DockerCMD = "${DockerHome}/bin/docker"
-        def activator_params = "${activator_params}"
-        def environment_params = "${environment_params}"
+        def activator_params = ""
+        def environment_params = ""
         def terraform_output = ""
     }
     stages {
@@ -50,10 +50,6 @@ pipeline
                     sh "mv terraform /usr/bin/ && rm -f terraform_0.14.11_linux_amd64.zip"
                     sh "mkdir deployment_code"
                     sh "cp deployment/*.tf deployment_code/"
-                    sh "echo \$activator_params | jq '.' > deployment_code/activator_params.json"
-                    sh "cat deployment_code/activator_params.json"
-                    sh "echo \$environment_params | jq '.' > deployment_code/environment_params.json"
-                    sh "cat deployment_code/environment_params.json"
                 }
             }
         }
@@ -67,7 +63,7 @@ pipeline
                         terraform init deployment_code
                         terraform validate deployment_code/
                         '''
-                    sh "terraform plan -out activator-plan -var='project_id=$projectid' -var-file=deployment_code/activator_params.json -var-file=deployment_code/environment_params.json deployment_code/"
+                    sh "terraform plan -out activator-plan -var='project_id=$projectid' -var-file=deployment_code/environment_params.json deployment_code/"
                     sh "terraform apply --auto-approve activator-plan"
                     sh "terraform output -json > activator_outputs.json"
                 }
