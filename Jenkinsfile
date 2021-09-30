@@ -68,7 +68,6 @@ pipeline
                             '''
                         sh "terraform plan -out activator-plan -var='project_id=$PROJECT_ID' -var-file=deployment_code/environment_params.json deployment_code/"
                         sh "terraform apply --auto-approve activator-plan"
-                        sh "terraform output -json > activator_outputs.json"
                     }
                 }
             }
