@@ -21,6 +21,8 @@ pipeline
                         sh '''
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                             gcloud config set project ${PROJECT_ID}
+
+                            gsutil ls -b gs://${PROJECT_ID}_state || gsutil mb -l ASIA gs://${PROJECT_ID}_state
                         '''
                     }
                 }
