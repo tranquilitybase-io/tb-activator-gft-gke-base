@@ -16,11 +16,11 @@ pipeline
     stages {
         stage('Activate GCP Service Account and Set Project') {
             steps {
-                withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'SECRET')]) {
+                withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'PROJECT_ID')]) {
                     container('gcloud'){
                         sh '''
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                            gcloud config set project ${SECRET}
+                            gcloud config set project ${PROJECT_ID}
                         '''
                     }
                 }
@@ -57,17 +57,19 @@ pipeline
         }
         stage('Activator Terraform init validate plan') {
             steps {
-                container('gcloud'){
-                    sh "echo $projectid"
-                    sh "cat deployment_code/activator_params.json"
-                    sh '''
-                        echo "$projectid"
-                        terraform init deployment_code
-                        terraform validate deployment_code/
-                        '''
-                    sh "terraform plan -out activator-plan -var='project_id=$projectid' -var-file=deployment_code/environment_params.json deployment_code/"
-                    sh "terraform apply --auto-approve activator-plan"
-                    sh "terraform output -json > activator_outputs.json"
+                withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'PROJECT_ID')]) {
+                    container('gcloud'){
+                        sh "echo $projectid"
+                        sh "cat deployment_code/activator_params.json"
+                        sh '''
+                            echo "$projectid"
+                            terraform init deployment_code
+                            terraform validate deployment_code/
+                            '''
+                        sh "terraform plan -out activator-plan -var='project_id=$PROJECT_ID' -var-file=deployment_code/environment_params.json deployment_code/"
+                        sh "terraform apply --auto-approve activator-plan"
+                        sh "terraform output -json > activator_outputs.json"
+                    }
                 }
             }
         }
