@@ -21,7 +21,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket  = "${var.project_id}_tf_state"
+    bucket  = "prj-bu1-d-sample-floating-64f7_state"
   }
 }
 
