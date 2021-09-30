@@ -194,4 +194,13 @@ resource "random_string" "suffix" {
   upper   = false
 }
 
+resource "google_sourcerepo_repository" "demo-application" {
+  name = "demo-application"
+}
 
+resource "google_cloudbuild_trigger" "build-trigger" {
+  trigger_template {
+    branch_name = "development"
+    repo_name   = "demo-application"
+  }
+}
