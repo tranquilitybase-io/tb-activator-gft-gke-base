@@ -21,7 +21,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket  = var.project_id+"_tf_state"
+    bucket  = "${var.project_id}_tf_state"
   }
 }
 
