@@ -19,7 +19,9 @@ pipeline
                 container('gcloud'){
                 sh '''
                     gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                    gcloud config set project $projectid
+                    withCredentials([usernamePassword(credentialsId: 'Development-Project-ID', variable: 'SECRET')]) {
+                        gcloud config set project ${SECRET}
+                    }
                 '''
                 }
             }
