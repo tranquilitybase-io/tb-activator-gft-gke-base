@@ -51,7 +51,7 @@ pipeline
                     sh "unzip ./terraform_0.14.11_linux_amd64.zip"
                     sh "mv terraform /usr/bin/ && rm -f terraform_0.14.11_linux_amd64.zip"
                     sh "mkdir deployment_code"
-                    sh "cp deployment/*.tf deployment_code/"
+                    sh "cp deployment/*.* deployment_code/"
                 }
             }
         }
