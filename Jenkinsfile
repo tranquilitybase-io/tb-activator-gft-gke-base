@@ -59,10 +59,10 @@ pipeline
             steps {
                 withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'PROJECT_ID')]) {
                     container('gcloud'){
-                        sh "echo $projectid"
+                        sh "echo $PROJECT_ID"
                         sh "cat deployment_code/activator_params.json"
                         sh '''
-                            echo "$projectid"
+                            echo "$PROJECT_ID"
                             terraform init deployment_code
                             terraform validate deployment_code/
                             '''
