@@ -7,8 +7,6 @@ pipeline
         }
     }
     environment {
-//         def DockerHome = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-//         def DockerCMD = "${DockerHome}/bin/docker"
         def activator_params = ""
         def environment_params = ""
         def terraform_output = ""
@@ -16,7 +14,7 @@ pipeline
     stages {
         stage('Activate GCP Service Account and Set Project') {
             steps {
-                withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'PROJECT_ID')]) {
+                withCredentials([string(credentialsId: 'Release-Project-ID', variable: 'PROJECT_ID')]) {
                     container('gcloud'){
                         sh '''
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
@@ -57,7 +55,7 @@ pipeline
         }
         stage('Activator Terraform init validate plan') {
             steps {
-                withCredentials([string(credentialsId: 'Development-Project-ID', variable: 'PROJECT_ID')]) {
+                withCredentials([string(credentialsId: 'Release-Project-ID', variable: 'PROJECT_ID')]) {
                     container('gcloud'){
                         sh '''
                             echo "$PROJECT_ID"

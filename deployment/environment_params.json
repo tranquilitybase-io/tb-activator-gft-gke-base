@@ -1,5 +1,5 @@
 {
-  "cluster_name": "development",
+  "cluster_name": "release",
   "enable_istio": "true",
   "region": "europe-west1",
   "location": "europe-west1"
