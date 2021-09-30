@@ -207,7 +207,7 @@ module "config_sync" {
   cluster_name     = module.gke_cluster.name
   location         = var.location
   cluster_endpoint = module.gke_cluster.endpoint
-
+  create_ssh_key   = "true"
   sync_repo        = "git@github.com:GoogleCloudPlatform/csp-config-management.git"
   sync_branch      = "1.0.0"
   policy_dir       = "foo-corp"
