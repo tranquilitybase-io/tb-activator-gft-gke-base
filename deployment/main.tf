@@ -81,6 +81,7 @@ module "gke_cluster" {
   }
 }
 
+
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A NODE POOL
 # ---------------------------------------------------------------------------------------------------------------------
@@ -198,13 +199,21 @@ resource "random_string" "suffix" {
   upper   = false
 }
 
-resource "google_sourcerepo_repository" "demo-application" {
-  name = "demo-application"
-}
-
-//resource "google_cloudbuild_trigger" "build-trigger" {
-//  trigger_template {
-//    branch_name = "development"
-//    repo_name   = "demo-application"
-//  }
+// ------
+//module "config_sync" {
+//  source           = "terraform-google-modules/kubernetes-engine/google//modules/config-sync"
+//
+//  project_id       = var.project_id
+//  cluster_name     = var.cluster_name
+//  location         = var.location
+//  cluster_endpoint = module.gke_cluster.endpoint
+//  create_ssh_key   = "false"
+//  secret_type      = "none"
+//  sync_repo        = "https://github.com/geoff-gft/hello-config-sync.git"
+//  sync_branch      = "release"
+//  policy_dir       = "policy"
+//
+//  depends_on = [
+//    module.gke_cluster.endpoint
+//  ]
 //}
