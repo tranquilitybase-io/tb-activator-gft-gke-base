@@ -201,8 +201,6 @@ resource "random_string" "suffix" {
 
 // ------
 module "config_sync" {
-  depends_on = [module.gke_cluster]
-
   source           = "terraform-google-modules/kubernetes-engine/google//modules/config-sync"
 
   project_id       = var.project_id
@@ -214,4 +212,9 @@ module "config_sync" {
   sync_repo        = "https://github.com/geoff-gft/zig-app-demo.git"
   sync_branch      = "master"
   policy_dir       = "policy"
+
+  depends_on = [
+    module.gke_cluster.name,
+    module.gke_cluster.endpoint
+  ]
 }
