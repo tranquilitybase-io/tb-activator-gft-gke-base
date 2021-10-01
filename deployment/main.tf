@@ -212,8 +212,5 @@ module "config_sync" {
   sync_repo        = "https://github.com/geoff-gft/hello-config-sync.git"
   sync_branch      = "development"
   policy_dir       = "policy"
-
-  depends_on = [
-    module.gke_cluster.endpoint
-  ]
+  
 }
