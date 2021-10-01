@@ -200,20 +200,20 @@ resource "random_string" "suffix" {
 }
 
 // ------
-module "config_sync" {
-  source           = "terraform-google-modules/kubernetes-engine/google//modules/config-sync"
-
-  project_id       = var.project_id
-  cluster_name     = var.cluster_name
-  location         = var.location
-  cluster_endpoint = module.gke_cluster.endpoint
-  create_ssh_key   = "false"
-  secret_type      = "none"
-  sync_repo        = "https://github.com/geoff-gft/hello-config-sync.git"
-  sync_branch      = "development"
-  policy_dir       = "policy"
-
-  depends_on = [
-    module.gke_cluster.endpoint
-  ]
-}
+//module "config_sync" {
+//  source           = "terraform-google-modules/kubernetes-engine/google//modules/config-sync"
+//
+//  project_id       = var.project_id
+//  cluster_name     = var.cluster_name
+//  location         = var.location
+//  cluster_endpoint = module.gke_cluster.endpoint
+//  create_ssh_key   = "false"
+//  secret_type      = "none"
+//  sync_repo        = "https://github.com/geoff-gft/hello-config-sync.git"
+//  sync_branch      = "development"
+//  policy_dir       = "policy"
+//
+//  depends_on = [
+//    module.gke_cluster.endpoint
+//  ]
+//}
