@@ -209,7 +209,7 @@ module "config_sync" {
   cluster_endpoint = module.gke_cluster.endpoint
   create_ssh_key   = "false"
   secret_type      = "none"
-  sync_repo        = "git@github.com:geoff-gft/hello-config-sync.git"
+  sync_repo        = "https://github.com/geoff-gft/zig-app-demo.git"
   sync_branch      = "master"
   policy_dir       = "policy"
 }
