@@ -201,6 +201,8 @@ resource "random_string" "suffix" {
 
 // ------
 module "config_sync" {
+  depends_on = [module.gke_cluster]
+
   source           = "terraform-google-modules/kubernetes-engine/google//modules/config-sync"
 
   project_id       = var.project_id
