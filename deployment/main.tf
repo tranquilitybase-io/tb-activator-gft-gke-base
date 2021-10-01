@@ -77,7 +77,7 @@ module "gke_cluster" {
   enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
 
   resource_labels = {
-    environment = "development"
+    environment = "zigdemo"
   }
 }
 
