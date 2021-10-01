@@ -77,7 +77,7 @@ module "gke_cluster" {
   enable_vertical_pod_autoscaling = var.enable_vertical_pod_autoscaling
 
   resource_labels = {
-    environment = "zigdemo"
+    environment = "development"
   }
 }
 
@@ -212,5 +212,5 @@ module "config_sync" {
   sync_repo        = "https://github.com/geoff-gft/hello-config-sync.git"
   sync_branch      = "development"
   policy_dir       = "policy"
-  
+
 }
